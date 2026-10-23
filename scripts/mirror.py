@@ -72,7 +72,7 @@ def mirror(name, version):
     if (name, version) in seen:
         return
     seen.add((name, version))
-    if not re.fullmatch(r"\d+(\.\d+)*(-[A-Za-z0-9.]+)?", version):
+    if not re.fullmatch(r"\d+(\.\d+)*(-[A-Za-z0-9.-]+)?", version):
         report.append(f"SKIPPED {name}#{version}: not a fixed version")
         return
     if have(name, version):
