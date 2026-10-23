@@ -37,7 +37,7 @@ jobs:
               if out=$(bun run ../folio-assistant-core/scripts/fetch-dspace-item.ts "$rest" --out "iris/$ig" 2>&1); then
                 echo "OK $ig $rest :: $(echo "$out" | head -2 | tr '\n' ' ')" >> iris/report.txt
               else
-                echo "FAILED $ig $rest :: $(echo "$out" | tail -1)" >> iris/report.txt
+                echo "FAILED $ig $rest :: $(echo "$out" | tail -12 | tr "\n" " ")" >> iris/report.txt
               fi
             else
               q=$(python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.argv[1]))' "$rest")

@@ -1,35 +1,8 @@
-# IRIS items to fetch (bean folio-assistant-53rv task 2).
+# IRIS items to fetch (bean folio-assistant-53rv task 2). Run 1 results: iris/report-run1.txt
 # fetch <ig> <handle URL>   |   search <ig> <query>
-fetch smart-immunizations https://iris.who.int/handle/10665/260307
-fetch smart-immunizations https://iris.who.int/handle/10665/255873
-fetch smart-immunizations https://iris.who.int/handle/10665/357168
-fetch smart-immunizations https://iris.who.int/handle/10665/329882
-fetch smart-immunizations https://iris.who.int/handle/10665/242413
-fetch smart-immunizations https://iris.who.int/handle/10665/254583
-fetch smart-immunizations https://iris.who.int/handle/10665/250796
-fetch smart-immunizations https://iris.who.int/handle/10665/242126
-fetch smart-immunizations https://iris.who.int/handle/10665/310970
-fetch smart-immunizations https://iris.who.int/handle/10665/341722
-fetch smart-immunizations https://iris.who.int/handle/10665/342905
 fetch smart-immunizations https://iris.who.int/handle/10665/255705
-fetch smart-immunizations https://iris.who.int/handle/10665/332952
-fetch smart-immunizations https://iris.who.int/handle/10665/365351
-fetch smart-immunizations https://iris.who.int/handle/10665/272273
-fetch smart-immunizations https://iris.who.int/handle/10665/242325
-fetch smart-immunizations https://iris.who.int/handle/10665/242089
-fetch smart-immunizations https://iris.who.int/handle/10665/241769
-fetch smart-immunizations https://iris.who.int/handle/10665/258764
-fetch smart-immunizations https://iris.who.int/handle/10665/242320
-fetch smart-immunizations https://iris.who.int/handle/10665/241846
-fetch smart-immunizations https://iris.who.int/handle/10665/363397
-fetch smart-immunizations https://iris.who.int/handle/10665/272372
-fetch smart-immunizations https://iris.who.int/handle/10665/274316
-fetch smart-immunizations https://iris.who.int/handle/10665/352337
-fetch smart-immunizations https://iris.who.int/handle/10665/240868
-fetch smart-immunizations https://iris.who.int/handle/10665/354265
-fetch smart-immunizations https://iris.who.int/handle/10665/242227
-search smart-immunizations Pneumococcal conjugate vaccines in infants and children under 5 years of age position paper 2019
-search smart-hiv digital adaptation kit HIV
-search smart-hiv Consolidated guidelines on HIV testing services 2019
-search smart-hiv Consolidated guidelines on the use of antiretroviral drugs for treating and preventing HIV infection 2016
-search smart-hiv Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring
+fetch smart-hiv https://iris.who.int/handle/10665/375230
+fetch smart-hiv https://iris.who.int/handle/10665/336323
+fetch smart-hiv https://iris.who.int/handle/10665/208825
+fetch smart-hiv https://iris.who.int/handle/10665/342899
+fetch smart-hiv https://iris.who.int/handle/10665/386765
