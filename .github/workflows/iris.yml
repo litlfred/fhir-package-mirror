@@ -7,7 +7,7 @@ name: Fetch IRIS sources
 on:
   push:
     branches: ["claude/iris-*"]
-    paths: ["iris.txt", ".github/workflows/iris.yml"]
+    paths: ["iris.txt", ".github/workflows/iris.yml", "scripts/fetch-dspace-pdf.ts"]
 
 permissions:
   contents: write
@@ -32,7 +32,14 @@ jobs:
           : > iris/search.txt
           grep -v '^#' iris.txt | while read -r kind ig rest; do
             [ -z "$kind" ] && continue
-            if [ "$kind" = fetch ]; then
+            if [ "$kind" = fetch-pdf ]; then
+              set -- $rest; mkdir -p "iris/$ig"
+              if out=$(bun run scripts/fetch-dspace-pdf.ts "$1" "$2" --out "iris/$ig" 2>&1); then
+                echo "OK $ig $rest :: $(echo "$out" | head -2 | tr '\n' ' ')" >> iris/report.txt
+              else
+                echo "FAILED $ig $rest :: $(echo "$out" | tail -12 | tr "\n" " ")" >> iris/report.txt
+              fi
+            elif [ "$kind" = fetch ]; then
               mkdir -p "iris/$ig"
               if out=$(bun run ../folio-assistant-core/scripts/fetch-dspace-item.ts "$rest" --out "iris/$ig" 2>&1); then
                 echo "OK $ig $rest :: $(echo "$out" | head -2 | tr '\n' ' ')" >> iris/report.txt

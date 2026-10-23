@@ -1,0 +1,6 @@
+FAILED smart-immunizations https://iris.who.int/handle/10665/255705 :: ✗ [   {     "origin": "array",     "code": "too_small",     "minimum": 1,     "inclusive": true,     "path": [       "fields"     ],     "message": "Too small: expected array to have >=1 items"   } ] 
+OK smart-hiv https://iris.who.int/handle/10665/375230 :: https://iris.who.int/handle/10665/375230 -> iris/smart-hiv/9789240085138-eng/9789240085138-eng.pdf (8739338 bytes)   licence: stated CC-BY-NC-SA-3.0-IGO 
+OK smart-hiv https://iris.who.int/handle/10665/336323 :: https://iris.who.int/handle/10665/336323 -> iris/smart-hiv/9789241550581-eng/9789241550581-eng.pdf (3510001 bytes)   licence: stated CC-BY-NC-SA-3.0-IGO 
+OK smart-hiv https://iris.who.int/handle/10665/208825 :: https://iris.who.int/handle/10665/208825 -> iris/smart-hiv/9789241549684_eng/9789241549684_eng.pdf (6264081 bytes)   licence: unknown  
+OK smart-hiv https://iris.who.int/handle/10665/342899 :: https://iris.who.int/handle/10665/342899 -> iris/smart-hiv/9789240031593-eng/9789240031593-eng.pdf (10865116 bytes)   licence: stated CC-BY-NC-SA-3.0-IGO 
+OK smart-hiv https://iris.who.int/handle/10665/386765 :: https://iris.who.int/handle/10665/386765 -> iris/smart-hiv/9789240124233-eng/9789240124233-eng.pdf (1406585 bytes)   licence: stated CC-BY-NC-SA-3.0-IGO 

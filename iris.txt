@@ -1,8 +1,3 @@
-# IRIS items to fetch (bean folio-assistant-53rv task 2). Run 1 results: iris/report-run1.txt
-# fetch <ig> <handle URL>   |   search <ig> <query>
-fetch smart-immunizations https://iris.who.int/handle/10665/255705
-fetch smart-hiv https://iris.who.int/handle/10665/375230
-fetch smart-hiv https://iris.who.int/handle/10665/336323
-fetch smart-hiv https://iris.who.int/handle/10665/208825
-fetch smart-hiv https://iris.who.int/handle/10665/342899
-fetch smart-hiv https://iris.who.int/handle/10665/386765
+# IRIS items to fetch (bean folio-assistant-53rv task 2). Earlier results: iris/report-run1.txt, report-run2.txt
+# fetch <ig> <handle URL>   |   fetch-pdf <ig> <handle URL> <pdf name>   |   search <ig> <query>
+fetch-pdf smart-immunizations https://iris.who.int/handle/10665/250796 9789241549912-eng.pdf
