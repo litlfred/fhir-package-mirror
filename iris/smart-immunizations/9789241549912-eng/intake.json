@@ -1,0 +1,29 @@
+{
+  "$schema": "folio-intake/v1",
+  "doc_id": "9789241549912-eng",
+  "record": "9789241549912-eng.dc.json",
+  "_comment": "Fetched from https://iris.who.int/handle/10665/250796 by folio-assistant-core/scripts/fetch-dspace-item.ts.",
+  "source": {
+    "upstream": "https://iris.who.int/items/9a90617b-f771-4d4d-a538-a51f87c51685",
+    "capturedAt": "2026-10-23T15:23:48Z",
+    "capturedBy": "fetch-dspace-item.ts (DSpace 7 REST API)"
+  },
+  "files": [
+    {
+      "path": "9789241549912-eng.pdf",
+      "bytes": 3903602,
+      "sha256": "338300b76172d410b91048209305fac53e1166c3be295a18b3f2c0c7c6b54182",
+      "type": "publication",
+      "role": "original-bitstream"
+    }
+  ],
+  "licence": {
+    "status": "unknown",
+    "searched": [
+      {
+        "where": "https://iris.who.int/items/9a90617b-f771-4d4d-a538-a51f87c51685 item metadata, dc.rights and dc.rights.uri",
+        "result": "no dc.rights field"
+      }
+    ]
+  }
+}
