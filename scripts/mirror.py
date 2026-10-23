@@ -72,6 +72,17 @@ def mirror(name, version):
     if (name, version) in seen:
         return
     seen.add((name, version))
+    if re.fullmatch(r"\d+(\.\d+)*\.x", version):
+        try:
+            pre = version[:-1]
+            vs = [v for v in meta(name).get("versions", {})
+                  if v.startswith(pre) and re.fullmatch(r"\d+(\.\d+)*", v)]
+            v = max(vs, key=lambda v: tuple(int(x) for x in v.split(".")))
+            report.append(f"RANGE {name}#{version} = {v}")
+            return mirror(name, v)
+        except Exception as e:
+            report.append(f"FAILED {name}#{version}: cannot resolve range ({e})")
+            return
     if not re.fullmatch(r"\d+(\.\d+)*(-[A-Za-z0-9.-]+)?", version):
         report.append(f"SKIPPED {name}#{version}: not a fixed version")
         return
