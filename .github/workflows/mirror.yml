@@ -1,0 +1,36 @@
+name: Mirror FHIR packages
+
+# Runs on a GitHub runner, which can reach packages.fhir.org.
+# Edit packages.txt on a claude/mirror-* branch, push, and the run commits
+# the tarballs back to that branch. Or run it by hand with a package list.
+on:
+  push:
+    branches: ["claude/mirror-*"]
+    paths: ["packages.txt", "scripts/mirror.py", ".github/workflows/mirror.yml"]
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: "Space-separated name#version (or name#latest)"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mirror
+        run: |
+          specs="${{ github.event.inputs.packages }}"
+          [ -z "$specs" ] && specs=$(grep -v '^#' packages.txt | xargs)
+          python3 scripts/mirror.py $specs
+      - name: Commit
+        run: |
+          git config user.name "fhir-package-mirror bot"
+          git config user.email "actions@github.com"
+          git add -A '*.tgz' SHA512SUMS mirror-report.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "Mirror $(grep -c '^ADDED' mirror-report.txt) FHIR package(s) from packages.fhir.org"
+          git push
