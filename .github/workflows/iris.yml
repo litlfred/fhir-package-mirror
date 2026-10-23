@@ -1,0 +1,70 @@
+name: Fetch IRIS sources
+
+# Runs on a GitHub runner, which can reach iris.who.int. Each `fetch` line runs
+# folio-assistant-core's fetch-dspace-item.ts into iris/<ig>/; each `search`
+# line writes DSpace search hits to iris/search.txt. Results are committed back
+# to the claude/iris-* branch that was pushed. This branch is not merged to main.
+on:
+  push:
+    branches: ["claude/iris-*"]
+    paths: ["iris.txt", ".github/workflows/iris.yml", "scripts/fetch-dspace-pdf.ts"]
+
+permissions:
+  contents: write
+
+jobs:
+  iris:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { path: mirror }
+      - uses: oven-sh/setup-bun@v2
+      - name: Layers
+        run: |
+          for r in folio-assistant-core cat-harness cat-harness-tools bootstrap-tools; do
+            git clone -q --depth 1 https://github.com/litlfred/$r $r
+          done
+          cd folio-assistant-core && bun install
+      - name: Fetch
+        working-directory: mirror
+        run: |
+          : > iris/report.txt 2>/dev/null || { mkdir -p iris; : > iris/report.txt; }
+          : > iris/search.txt
+          grep -v '^#' iris.txt | while read -r kind ig rest; do
+            [ -z "$kind" ] && continue
+            if [ "$kind" = fetch-pdf ]; then
+              set -- $rest; mkdir -p "iris/$ig"
+              if out=$(bun run scripts/fetch-dspace-pdf.ts "$1" "$2" --out "iris/$ig" 2>&1); then
+                echo "OK $ig $rest :: $(echo "$out" | head -2 | tr '\n' ' ')" >> iris/report.txt
+              else
+                echo "FAILED $ig $rest :: $(echo "$out" | tail -12 | tr "\n" " ")" >> iris/report.txt
+              fi
+            elif [ "$kind" = fetch ]; then
+              mkdir -p "iris/$ig"
+              if out=$(bun run ../folio-assistant-core/scripts/fetch-dspace-item.ts "$rest" --out "iris/$ig" 2>&1); then
+                echo "OK $ig $rest :: $(echo "$out" | head -2 | tr '\n' ' ')" >> iris/report.txt
+              else
+                echo "FAILED $ig $rest :: $(echo "$out" | tail -12 | tr "\n" " ")" >> iris/report.txt
+              fi
+            else
+              q=$(python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.argv[1]))' "$rest")
+              echo "== $ig: $rest" >> iris/search.txt
+              curl -sS "https://iris.who.int/server/api/discover/search/objects?query=$q&dsoType=ITEM&size=8" \
+                | python3 -c 'import sys,json
+          d=json.load(sys.stdin)
+          for o in d["_embedded"]["searchResult"]["_embedded"]["objects"]:
+              it=o["_embedded"]["indexableObject"]; m=it["metadata"]
+              t=m.get("dc.title",[{}])[0].get("value"); y=(m.get("dc.date.issued") or [{}])[0].get("value")
+              print(" ", it.get("handle"), y, t)' >> iris/search.txt 2>&1 || echo "  search failed" >> iris/search.txt
+            fi
+          done
+          cat iris/report.txt iris/search.txt
+      - name: Commit
+        working-directory: mirror
+        run: |
+          git config user.name "fhir-package-mirror bot"
+          git config user.email "actions@github.com"
+          git add -A iris
+          git diff --cached --quiet && exit 0
+          git commit -m "Fetch IRIS sources: $(grep -c '^OK' iris/report.txt) ok, $(grep -c '^FAILED' iris/report.txt) failed"
+          git push
