@@ -7,7 +7,7 @@ Two GitHub Actions do the fetching on a GitHub runner, which can reach hosts tha
 ## Adding packages: `mirror.yml`
 
 1. Branch from `main` as `claude/mirror-<topic>`.
-2. List the packages in `packages.txt`, one per line, as `name#version`, `name#1.2.x` (newest match) or `name#latest` (newest release).
+2. List the packages in `packages.txt`, one per line, as `name#version`, `name#current` (CI build from `build.fhir.org/ig/qas.json`, with `package/package.json` `version` normalized to `"current"`), `name#1.2.x` (newest match) or `name#latest` (newest release).
 3. Push. The run fetches each package and its dependencies from packages.fhir.org. It skips anything already here or on npm at that exact version, and refuses a tarball whose `package/package.json` names a different package or version. Then it adds `SHA512SUMS` lines and commits back to the branch. Results go to `mirror-report.txt` as `ADDED`, `HAVE`, `NPM`, `RANGE`, `LATEST`, `SKIPPED` and `FAILED` lines.
 4. Open a PR to `main` and merge it. You can also run the workflow by hand with a package list.
 

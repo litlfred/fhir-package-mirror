@@ -8,3 +8,6 @@ ihe.pharm.meow#1.0.0-preview
 smart.who.int.ph4h#0.9.9
 smart.who.int.base#0.1.0
 ihe.formatcode.fhir#1.2.x
+# smart-trust-phw (bean folio-assistant-k4sp, 2026-10-30)
+ihe.iti.vhl#1.0.0-comment
+smart.who.int.pcmt-vaxprequal#current
