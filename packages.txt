@@ -11,3 +11,9 @@ ihe.formatcode.fhir#1.2.x
 # smart-trust-phw (bean folio-assistant-k4sp, 2026-10-30)
 ihe.iti.vhl#1.0.0-comment
 smart.who.int.pcmt-vaxprequal#current
+# litlfred WHO forks harnessed on smart-base (card Q-JTD-2 A, 2026-11-10): sushi deps missing here
+who.base#current
+smart.who.int.base#current
+smart.who.int.base#0.2.0
+hl7.fhir.r4b.core#4.3.0
+hl7.fhir.uv.cpg#2.0.0

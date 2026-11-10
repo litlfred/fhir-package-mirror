@@ -40,3 +40,12 @@ HAVE hl7.fhir.uv.extensions.r5#5.2.0
 NPM hl7.fhir.r5.core#5.0.0
 NPM smart.who.int.pcmt#0.1.0
 NPM ihe.iti.mcsd#4.0.0
+FAILED who.base#current: no current build in https://build.fhir.org/ig/qas.json for who.base
+ADDED smart.who.int.base#current
+HAVE hl7.terminology#7.3.0
+NPM hl7.fhir.uv.cql#2.0.0
+HAVE hl7.fhir.uv.crmi#2.0.0
+HAVE hl7.fhir.uv.sdc#4.0.0
+HAVE hl7.fhir.uv.tools.r4#1.1.2
+NPM hl7.fhir.uv.extensions.r4#5.3.0-ballot-tc1
+NPM hl7.fhir.r4b.core#4.3.0
